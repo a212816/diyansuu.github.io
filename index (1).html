@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Surplusly e-Portfolio — Nurul Diana Amira</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --orange:    #E8611A;
+    --gold:      #F5A623;
+    --cream:     #FDF6EC;
+    --dark:      #1A1208;
+    --mid:       #3D2C10;
+    --muted:     #7A6045;
+    --surface:   #FFFFFF;
+    --border:    #EDE0CC;
+    --green-sdg: #4CAF50;
+    --radius:    12px;
+    --nav-h:     64px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.65;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    height: var(--nav-h);
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    box-shadow: 0 2px 16px rgba(0,0,0,.35);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    color: var(--gold);
+    font-size: 1.35rem;
+    letter-spacing: -.5px;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+  .nav-links a {
+    color: #D4B896;
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: .3s; }
+  @media (max-width: 680px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--dark); padding: 1.5rem 5vw; gap: 1rem; }
+    .nav-links.open { display: flex; }
+    .nav-hamburger { display: flex; }
+  }
+
+  /* ── HERO ── */
+  #home {
+    min-height: calc(100vh - var(--nav-h));
+    background: linear-gradient(135deg, var(--dark) 0%, #2E1C08 55%, #1A3020 100%);
+    display: flex; align-items: center;
+    padding: 6rem 5vw 4rem;
+    position: relative; overflow: hidden;
+  }
+  #home::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(245,166,35,.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 680px; position: relative; }
+  .hero-sdg-pill {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(245,166,35,.35);
+    border-radius: 999px;
+    padding: .35rem 1rem;
+    font-size: .75rem; font-weight: 700; letter-spacing: .1em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-sdg-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+  h1.hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+  h1.hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: #B8A080;
+    margin-bottom: 2rem;
+    max-width: 520px;
+  }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
+  .hero-chip {
+    font-size: .8rem; font-weight: 600;
+    color: #D4B896;
+    border-left: 2px solid var(--orange);
+    padding-left: .6rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 5vw; }
+  .section-label {
+    font-size: .75rem; font-weight: 800; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: .5rem;
+  }
+  h2.section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--dark);
+    margin-bottom: 2.5rem;
+    line-height: 1.15;
+  }
+  .divider {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    border-radius: 2px;
+    margin: .75rem 0 2.5rem;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.75rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow .25s, transform .25s;
+  }
+  .card:hover { box-shadow: 0 8px 32px rgba(232,97,26,.15); transform: translateY(-3px); }
+  .card-video { width: 100%; aspect-ratio: 16/9; }
+  .card-video iframe { width: 100%; height: 100%; border: none; display: block; }
+  .card-body { padding: 1.25rem 1.4rem 1.5rem; }
+  .card-tag {
+    display: inline-block;
+    background: #FEF0E6; color: var(--orange);
+    font-size: .7rem; font-weight: 800; letter-spacing: .1em;
+    text-transform: uppercase; border-radius: 4px;
+    padding: .2rem .55rem; margin-bottom: .75rem;
+  }
+  .card-title {
+    font-weight: 700; font-size: 1.05rem;
+    color: var(--dark); margin-bottom: .5rem;
+  }
+  .card-desc { font-size: .9rem; color: var(--muted); margin-bottom: .85rem; }
+  .card-reflection {
+    font-size: .88rem; color: #4A3B28;
+    background: #FBF3E8;
+    border-left: 3px solid var(--gold);
+    padding: .7rem .9rem;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+  }
+  .btn-github {
+    display: inline-flex; align-items: center; gap: .45rem;
+    margin-top: 1rem;
+    background: var(--dark); color: #fff;
+    text-decoration: none; font-size: .82rem; font-weight: 700;
+    padding: .55rem 1.1rem; border-radius: 7px;
+    transition: background .2s;
+  }
+  .btn-github:hover { background: var(--mid); }
+  .btn-github svg { flex-shrink: 0; }
+
+  /* ── SDG BANNER ── */
+  .sdg-banner {
+    background: linear-gradient(120deg, #1A3020 0%, #0D1F14 100%);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    display: flex; align-items: flex-start; gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .sdg-icon {
+    flex-shrink: 0;
+    width: 64px; height: 64px; border-radius: 10px;
+    background: var(--green-sdg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem; color: #fff;
+    line-height: 1;
+  }
+  .sdg-text h3 { color: #fff; font-size: 1.2rem; margin-bottom: .4rem; }
+  .sdg-text p { color: #8FC89A; font-size: .9rem; }
+
+  /* ── REFLECTION ── */
+  #reflection { background: var(--dark); }
+  #reflection .section-label { color: var(--gold); }
+  #reflection h2.section-title { color: #fff; }
+  .reflection-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--radius);
+    padding: 2rem 2.5rem;
+    max-width: 760px;
+  }
+  .reflection-card p { color: #C8B090; font-size: 1rem; line-height: 1.8; }
+  .reflection-card p + p { margin-top: 1rem; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: flex; flex-wrap: wrap; gap: .75rem;
+  }
+  .skill-chip {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 999px; padding: .4rem 1rem;
+    font-size: .82rem; font-weight: 600; color: var(--mid);
+    transition: border-color .2s, color .2s;
+  }
+  .skill-chip:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ── RESOURCES ── */
+  .resources-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+  .resources-list li {
+    display: flex; align-items: flex-start; gap: .75rem;
+    font-size: .9rem; color: var(--muted);
+  }
+  .resources-list li::before {
+    content: '→';
+    color: var(--orange); font-weight: 700; flex-shrink: 0; margin-top: .05rem;
+  }
+  .resources-list a { color: var(--orange); text-decoration: none; font-weight: 600; }
+  .resources-list a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding: 2.5rem 5vw;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .footer-name {
+    font-family: 'DM Serif Display', serif;
+    color: var(--gold); font-size: 1.1rem;
+  }
+  .footer-meta { font-size: .8rem; color: #6A5035; }
+  .footer-sdg {
+    font-size: .78rem; font-weight: 700; color: var(--green-sdg);
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Surplusly</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#labs">Labs</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-sdg-pill"><span class="dot"></span> SDG 2: Zero Hunger</div>
+    <h1 class="hero-title">Mobile App Dev<br><span>e-Portfolio</span></h1>
+    <p class="hero-sub">
+      I built <strong style="color:#fff">Surplusly</strong> — an Android app that helps reduce food waste by connecting users with surplus food in their community. From a basic UI to full cloud + barcode integration, this portfolio documents that journey.
+    </p>
+    <div class="hero-meta">
+      <span class="hero-chip">Nurul Diana Amira Binti Mohd Jalil</span>
+      <span class="hero-chip">A212816</span>
+      <span class="hero-chip">Software Engineering</span>
+      <span class="hero-chip">Dr. Nazatul Aini binti Abd Majid</span>
+    </div>
+  </div>
+</section>
+
+<!-- SDG -->
+<section id="sdg" style="padding-top: 4rem; padding-bottom: 1rem;">
+  <div class="sdg-banner">
+    <div class="sdg-icon">2</div>
+    <div class="sdg-text">
+      <h3>SDG 2: Zero Hunger</h3>
+      <p>Millions of people still go to bed hungry while food is being wasted every day. Surplusly uses technology to bridge that gap — helping communities share surplus food rather than discard it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LABS -->
+<section id="labs">
+  <p class="section-label">Learning Journey</p>
+  <h2 class="section-title">Lab Work</h2>
+  <div class="divider"></div>
+  <div class="cards-grid">
+
+    <article class="card">
+      <div class="card-video"><iframe src="https://www.youtube.com/embed/VTAAyTX5Qqs" title="Lab 1 — UI" allowfullscreen loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag">Lab 1</span>
+        <h3 class="card-title">UI Layout</h3>
+        <p class="card-desc">Built the initial user interface for Surplusly using Jetpack Compose, establishing the visual foundation of the app.</p>
+        <blockquote class="card-reflection">In Lab 1, I built the initial UI layout for Surplusly using Jetpack Compose, focusing on clean screen structure and component placement. This was my first hands-on experience designing a mobile interface, and I learned how to organise composables effectively. It set the visual foundation for the entire app.</blockquote>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-video"><iframe src="https://www.youtube.com/embed/uFcQdu6OB1c" title="Lab 2 — Interaction" allowfullscreen loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag">Lab 2</span>
+        <h3 class="card-title">Interaction & State</h3>
+        <p class="card-desc">Added click events, state management, and navigation between screens to make the app responsive to user input.</p>
+        <blockquote class="card-reflection">Lab 2 introduced user interaction by adding click events, state management, and navigation between screens in Surplusly. I learned how to handle user input and respond to it dynamically using Compose state. This made the app feel alive and responsive for the first time.</blockquote>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-video"><iframe src="https://www.youtube.com/embed/_hSdTld-7C0" title="Lab 3 — Material Design" allowfullscreen loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag">Lab 3</span>
+        <h3 class="card-title">Material Design</h3>
+        <p class="card-desc">Applied Material Design 3 components — colour schemes, typography, and cards — to give Surplusly a polished, consistent look.</p>
+        <blockquote class="card-reflection">In Lab 3, I applied Material Design 3 components to give Surplusly a polished and consistent look. I worked with colour schemes, typography, and card components to improve visual hierarchy. The app started to look professional and aligned with modern Android design standards.</blockquote>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-video"><iframe src="https://www.youtube.com/embed/ciHhZXPAQoA" title="Lab 4 — Navigation" allowfullscreen loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag">Lab 4</span>
+        <h3 class="card-title">Navigation</h3>
+        <p class="card-desc">Implemented multi-screen navigation using Jetpack Navigation Compose, turning Surplusly into a fully navigable multi-page application.</p>
+        <blockquote class="card-reflection">Lab 4 focused on implementing multi-screen navigation using Jetpack Navigation Compose. I structured the app's navigation graph to allow smooth transitions between Home, Add Food, and Profile screens. This was a significant milestone as Surplusly became a fully navigable multi-page application.</blockquote>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-video"><iframe src="https://www.youtube.com/embed/mwSopd4LDBg" title="Lab 5 — Room Database" allowfullscreen loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag">Lab 5</span>
+        <h3 class="card-title">Room Database</h3>
+        <p class="card-desc">Integrated Room Database for local data persistence, allowing Surplusly to store and retrieve food listings offline.</p>
+        <blockquote class="card-reflection">Lab 5 introduced local data persistence using Room Database, allowing Surplusly to store and retrieve food listings offline. I implemented DAO interfaces, entities, and a repository pattern to manage data flow cleanly. This was the most technically challenging lab and gave me a solid understanding of local storage in Android.</blockquote>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: #F5EDD8;">
+  <p class="section-label">Deliverables</p>
+  <h2 class="section-title">Projects</h2>
+  <div class="divider"></div>
+  <div class="cards-grid">
+
+    <article class="card">
+      <div class="card-video"><iframe src="https://www.youtube.com/embed/gIpyWKgaK40" title="Project 1 VSR" allowfullscreen loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag">Project 1</span>
+        <h3 class="card-title">Surplusly — Working Features</h3>
+        <p class="card-desc">Food waste is a growing problem, yet surplus food often goes uneaten due to lack of visibility. Surplusly addresses this by providing a platform for users to list and discover surplus food in their community.</p>
+        <blockquote class="card-reflection">Building Project 1 taught me how to integrate multiple features into a coherent working app. I learned to manage navigation, UI state, and user flows together for the first time. It also highlighted areas for improvement that I carried into Project 2.</blockquote>
+        <a href="#" class="btn-github" aria-label="View Project 1 on GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-video"><iframe src="https://www.youtube.com/embed/I8SLEzpY4ZE" title="Project 2 VSR" allowfullscreen loading="lazy"></iframe></div>
+      <div class="card-body">
+        <span class="card-tag">Project 2</span>
+        <h3 class="card-title">Surplusly — Cloud + Barcode + API</h3>
+        <p class="card-desc">Manually entering food details is tedious and error-prone, and data needs to persist across devices. Project 2 adds barcode scanning via CameraX and ML Kit, fetches product data from OpenFoodFacts API, and syncs everything to Firebase Firestore.</p>
+        <blockquote class="card-reflection">Project 2 was the most complex build I have undertaken, combining Room Database, Firebase Firestore, Retrofit, CameraX, and ML Kit barcode scanning in one app. I learned how to handle asynchronous API calls, manage cloud sync alongside local storage, and debug complex Gradle dependency conflicts. This project gave me real-world Android development experience that I am proud of.</blockquote>
+        <a href="#" class="btn-github" aria-label="View Project 2 on GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection">
+  <p class="section-label">Looking Back</p>
+  <h2 class="section-title">Reflection & Learning Journey</h2>
+  <div class="divider" style="background: linear-gradient(90deg, var(--gold), var(--orange));"></div>
+  <div class="reflection-card">
+    <p>Starting from Lab 1 where I built a simple UI, I have grown into a developer capable of building a full-stack Android app with cloud integration, external APIs, and camera hardware access. Each lab built on the previous one, and Surplusly evolved from a static screen into a dynamic, data-driven application.</p>
+    <p>The biggest challenge was managing multiple integrations in Project 2, but it taught me resilience, problem-solving, and the importance of clean architecture. Debugging Gradle dependency conflicts and synchronising Room with Firebase Firestore pushed me beyond my comfort zone and made me a better engineer.</p>
+    <p>I leave this course with both technical skills and a genuine passion for building apps that solve real-world problems — and the confidence that I can tackle complexity head-on.</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Tech Stack</p>
+  <h2 class="section-title">Skills & Technologies</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <span class="skill-chip">Kotlin</span>
+    <span class="skill-chip">Jetpack Compose</span>
+    <span class="skill-chip">Room Database</span>
+    <span class="skill-chip">Firebase Firestore</span>
+    <span class="skill-chip">Retrofit</span>
+    <span class="skill-chip">OpenFoodFacts API</span>
+    <span class="skill-chip">CameraX</span>
+    <span class="skill-chip">ML Kit Barcode Scanning</span>
+    <span class="skill-chip">Material Design 3</span>
+    <span class="skill-chip">Jetpack Navigation</span>
+    <span class="skill-chip">Android Studio</span>
+    <span class="skill-chip">GitHub</span>
+    <span class="skill-chip">Gradle</span>
+    <span class="skill-chip">Coroutines / Flow</span>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources" style="background: #F5EDD8;">
+  <p class="section-label">References & Acknowledgements</p>
+  <h2 class="section-title">Resources</h2>
+  <div class="divider"></div>
+  <ul class="resources-list">
+    <li><a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener">OpenFoodFacts API</a> — open food product database used for barcode lookup in Surplusly</li>
+    <li><a href="https://firebase.google.com/" target="_blank" rel="noopener">Firebase Firestore</a> — cloud NoSQL database for cross-device data sync</li>
+    <li><a href="https://developers.google.com/ml-kit" target="_blank" rel="noopener">ML Kit Barcode Scanning</a> — on-device ML for scanning food product barcodes</li>
+    <li><a href="https://developer.android.com/training/camerax" target="_blank" rel="noopener">CameraX (Jetpack)</a> — camera hardware abstraction used alongside ML Kit</li>
+    <li><a href="https://square.github.io/retrofit/" target="_blank" rel="noopener">Retrofit</a> — HTTP client library for API calls to OpenFoodFacts</li>
+    <li><a href="https://developer.android.com/training/data-storage/room" target="_blank" rel="noopener">Room Persistence Library</a> — local SQLite ORM for offline data storage</li>
+    <li><span style="color:var(--dark); font-weight:600;">AI Assistance</span> — Claude by Anthropic was used to support code debugging, Gradle error resolution, and e-Portfolio generation throughout this course</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Nurul Diana Amira Binti Mohd Jalil</span>
+  <span class="footer-meta">A212816 &nbsp;·&nbsp; Software Engineering &nbsp;·&nbsp; TK2323/TM2213 &nbsp;·&nbsp; 2025</span>
+  <span class="footer-sdg">🌱 SDG 2: Zero Hunger</span>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+</body>
+</html>
